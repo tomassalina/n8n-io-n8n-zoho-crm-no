@@ -37,5 +37,5 @@ export const EmailOperations: INodeProperties = {
 		},
 	},
 	options: operations,
-	default: 'scheduleEmailTemplate',
+	default: 'getEmails',
 };

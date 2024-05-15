@@ -81,12 +81,16 @@ const deleteEmails = async (zoho: ZohoCRM, fields: DeleteFields) => {
 	}
 };
 
-export interface ExecuteEmailParams {
+export interface HandleEmailExecutionParams {
 	zoho: ZohoCRM;
 	operation: EmailOperation;
 	fields: GetEmailsFields | GetSpecificEmailFields | SendEmailFields | DeleteFields;
 }
-export const handleEmailExecution = async ({ zoho, operation, fields }: ExecuteEmailParams) => {
+export const handleEmailExecution = async ({
+	zoho,
+	operation,
+	fields,
+}: HandleEmailExecutionParams) => {
 	switch (operation) {
 		case 'getEmails':
 			return await getEmails(zoho, fields as GetEmailsFields);
@@ -97,6 +101,6 @@ export const handleEmailExecution = async ({ zoho, operation, fields }: ExecuteE
 		case 'deleteEmails':
 			return await deleteEmails(zoho, fields as DeleteFields);
 		default:
-			return '';
+			return { errMessage: `The operation '${operation}' is not supported in Zoho Library yet` };
 	}
 };

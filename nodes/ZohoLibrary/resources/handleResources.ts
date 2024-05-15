@@ -1,8 +1,14 @@
 import { ZohoCRM } from 'zoho-library';
-import { ZohoLibraryResource } from './type';
-import { EmailOperation } from './Email/type';
-import { ExecuteEmailParams, handleEmailExecution } from './Email/handleEmailExecution';
 import { ZohoLibraryCredentials } from '../../../credentials/ZohoLibraryApi.credentials';
+import { ZohoLibraryResource } from './type';
+
+// Resource: core
+import { CoreOperation } from './Core/type';
+import { handleCoreExecution } from './Core/handleCoreExecution';
+
+// Resource: email
+import { EmailOperation } from './Email/type';
+import { HandleEmailExecutionParams, handleEmailExecution } from './Email/handleEmailExecution';
 
 export interface ZohoLibraryNodeParameters {
 	resource: ZohoLibraryResource;
@@ -11,7 +17,7 @@ export interface ZohoLibraryNodeParameters {
 interface handleResourcesParameters {
 	resource: ZohoLibraryResource;
 	credentials: ZohoLibraryCredentials;
-	operation: EmailOperation;
+	operation: CoreOperation | EmailOperation;
 	fields: object;
 }
 
@@ -28,13 +34,17 @@ export const handleResources = async ({
 	});
 
 	switch (resource) {
-		// case 'core': return
+		case 'core':
+			return handleCoreExecution({
+				zoho,
+				operation: operation as CoreOperation,
+			});
 		// case 'record': return
 		case 'email':
 			return await handleEmailExecution({
 				zoho,
-				operation,
-				fields: fields as ExecuteEmailParams['fields'],
+				operation: operation as EmailOperation,
+				fields: fields as HandleEmailExecutionParams['fields'],
 			});
 		// case 'attachment': return
 		default:
