@@ -1,4 +1,4 @@
-import { Field } from '../../type';
+import { Field } from '../type';
 
 export const fields: Field[] = [
 	// _____All methods
@@ -105,7 +105,7 @@ export const fields: Field[] = [
 			},
 			{
 				displayName: 'Owner ID',
-				name: 'owner_id',
+				name: 'ownerId',
 				type: 'string',
 				default: '2313985000000470001',
 				description:

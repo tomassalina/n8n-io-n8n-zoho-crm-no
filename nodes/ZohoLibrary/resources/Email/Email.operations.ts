@@ -1,5 +1,5 @@
 import { INodeProperties } from 'n8n-workflow';
-import { Operation } from '../../type';
+import { Operation } from '../type';
 
 import { resource } from './Email.resource';
 

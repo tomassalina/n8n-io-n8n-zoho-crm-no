@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-class-description-icon-not-svg */
 import {
 	IExecuteFunctions,
 	INodeExecutionData,
@@ -9,11 +10,12 @@ import { ZohoCRM } from 'zoho-library';
 
 import { ZohoLibraryCredentials } from '../../credentials/ZohoLibraryApi.credentials';
 import { ZohoLibraryProperties } from './ZohoLibrary.node.properties';
+import { handleResources } from './resources/handleResources';
 
 const description: INodeTypeDescription = {
 	displayName: 'Zoho Library',
 	name: 'zohoLibrary',
-	icon: 'file:zohocrm.logo.svg',
+	icon: 'file:zohocrm.logo.png',
 	group: ['transform', 'zoho'],
 	version: 1,
 	subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -57,26 +59,15 @@ export class ZohoLibrary implements INodeType {
 				});
 				nodeParameters.credentials = credentials;
 
-				const response = await zoho.emails.sendEmail({
-					moduleName: nodeParameters['moduleName'],
-					recordId: nodeParameters['recordId'],
-					from: {
-						userName: nodeParameters['from'].split(',')[0],
-						email: nodeParameters['from'].split(',')[1],
-					},
-					to: [
-						{
-							userName: nodeParameters['to'].split(',')[0],
-							email: nodeParameters['to'].split(',')[1],
-						},
-					],
-					orgEmail: nodeParameters['orgEmail'],
-					templateId: nodeParameters['templateId'],
-					scheduledTime: nodeParameters['scheduledTime'],
+				const response = await handleResources({
+					resource: nodeParameters['resource'],
+					operation: nodeParameters['operation'],
+					credentials,
+					fields: nodeParameters,
 				});
 
 				returnData.push({
-					json: response.data,
+					json: response,
 				});
 			} catch (error) {
 				if (this.continueOnFail()) {
