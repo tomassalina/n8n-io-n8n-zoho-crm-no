@@ -13,7 +13,6 @@ const getEmails = async (zoho: ZohoCRM, fields: GetEmailsFields) => {
 			ownerId: fields.getEmailsParameters.ownerId,
 			index: fields.getEmailsParameters.index,
 		};
-		console.log(options);
 		const response = await zoho.emails.getEmails(options);
 
 		return response.data;
@@ -29,7 +28,6 @@ const getSpecificEmail = async (zoho: ZohoCRM, fields: GetSpecificEmailFields) =
 			recordId: fields.recordId,
 			messageId: fields.messageId,
 		};
-		console.log(options);
 		const response = await zoho.emails.getSpecificEmail(options);
 
 		return response.data;
@@ -60,7 +58,6 @@ const sendEmail = async (zoho: ZohoCRM, fields: SendEmailFields) => {
 			templateId: fields.sendEmailOptions.templateId,
 			scheduledTime: fields.sendEmailOptions.scheduledTime,
 		};
-		console.log(options);
 		const response = await zoho.emails.sendEmail(options);
 
 		return response.data;
@@ -76,7 +73,6 @@ const deleteEmails = async (zoho: ZohoCRM, fields: DeleteFields) => {
 			recordId: fields.recordId,
 			messageIds: fields.messageIds.split(','),
 		};
-		console.log(options);
 		const response = await zoho.emails.deleteEmails(options);
 
 		return response.data;
