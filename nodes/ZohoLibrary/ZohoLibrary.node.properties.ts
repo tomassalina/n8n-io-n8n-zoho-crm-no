@@ -16,7 +16,7 @@ export const ZohoLibraryProperties: INodeProperties[] = [
 			},
 			EmailResource,
 		],
-		default: 'record',
+		default: 'core',
 	},
 	// ______CORE:
 	CoreOperations,
