@@ -66,6 +66,10 @@ export class ZohoLibrary implements INodeType {
 					fields: nodeParameters,
 				});
 
+				if (response.errMessage)
+					throw new NodeOperationError(this.getNode(), response.errMessage, {
+						itemIndex,
+					});
 				returnData.push({
 					json: response,
 				});
