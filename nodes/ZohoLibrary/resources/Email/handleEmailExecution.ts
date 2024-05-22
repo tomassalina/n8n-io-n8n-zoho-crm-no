@@ -13,7 +13,6 @@ const getEmails = async (zoho: ZohoCRM, fields: GetEmailsFields) => {
 			ownerId: fields.getEmailsParameters.ownerId,
 			index: fields.getEmailsParameters.index,
 		};
-		console.log(options);
 		const response = await zoho.emails.getEmails(options);
 
 		return response.data;
