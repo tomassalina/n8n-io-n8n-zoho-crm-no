@@ -35,24 +35,4 @@ export class ZohoLibraryApi implements ICredentialType {
 			default: '',
 		},
 	];
-
-	// authenticate: IAuthenticateGeneric = {
-	// 	type: 'generic',
-	// 	properties: {
-	// 		auth: {
-	// 			username: '={{ $credentials.username }}',
-	// 			password: '={{ $credentials.password }}',
-	// 		},
-	// 		qs: {
-	// 			n8n: 'rocks',
-	// 		},
-	// 	},
-	// };
-
-	// test: ICredentialTestRequest = {
-	// 	request: {
-	// 		baseURL: 'https://accounts.zoho.com/oauth/v2/token/',
-	// 		url: '?',
-	// 	},
-	// };
 }

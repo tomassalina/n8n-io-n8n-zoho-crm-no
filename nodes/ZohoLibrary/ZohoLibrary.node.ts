@@ -6,7 +6,6 @@ import {
 	INodeTypeDescription,
 	NodeOperationError,
 } from 'n8n-workflow';
-import { ZohoCRM } from 'zoho-library';
 
 import { ZohoLibraryCredentials } from '../../credentials/ZohoLibraryApi.credentials';
 import { ZohoLibraryProperties } from './ZohoLibrary.node.properties';
@@ -43,12 +42,6 @@ export class ZohoLibrary implements INodeType {
 		const credentials = (await this.getCredentials('zohoLibraryApi').catch(
 			(e) => e,
 		)) as ZohoLibraryCredentials;
-		const zoho = new ZohoCRM({
-			clientId: credentials.clientId,
-			clientSecret: credentials.clientSecret,
-			refreshToken: credentials.refreshToken,
-		});
-		await zoho.authenticate();
 
 		const items: INodeExecutionData[] = this.getInputData();
 		for (let itemIndex: number = 0; itemIndex < items.length; itemIndex++) {
