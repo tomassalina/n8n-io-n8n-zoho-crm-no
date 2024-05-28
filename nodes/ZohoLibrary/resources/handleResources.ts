@@ -6,6 +6,10 @@ import { ZohoLibraryResource } from './type';
 import { CoreOperation } from './Core/type';
 import { handleCoreExecution } from './Core/handleCoreExecution';
 
+// Resource: record
+import { RecordOperation } from './Record/type';
+import { HandleRecordExecutionParams, handleRecordExecution } from './Record/handleRecordExecution';
+
 // Resource: email
 import { EmailOperation } from './Email/type';
 import { HandleEmailExecutionParams, handleEmailExecution } from './Email/handleEmailExecution';
@@ -39,7 +43,12 @@ export const handleResources = async ({
 				zoho,
 				operation: operation as CoreOperation,
 			});
-		// case 'record': return
+		case 'record':
+			return await handleRecordExecution({
+				zoho,
+				operation: operation as RecordOperation,
+				fields: fields as HandleRecordExecutionParams['fields'],
+			});
 		case 'email':
 			return await handleEmailExecution({
 				zoho,

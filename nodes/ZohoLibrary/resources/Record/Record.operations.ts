@@ -20,9 +20,9 @@ const operations: Operation[] = [
 		action: 'Search records',
 	},
 	{
-		name: 'Create Record',
-		value: 'createRecord',
-		action: 'Create record',
+		name: 'Create Records',
+		value: 'createRecords',
+		action: 'Create records',
 	},
 	{
 		name: 'Update Record',

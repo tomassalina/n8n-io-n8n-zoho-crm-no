@@ -51,7 +51,32 @@ export const fields: Field[] = [
 	// Operations that requires data
 	{
 		displayName: 'Data',
-		name: 'data',
+		name: 'createRecordsData',
+		description: 'The data object',
+		default: `{
+	"records": [
+		{
+			"Deal_Name": "Resorsi",
+			"Stage": "Intro"
+		},
+		{
+			"Deal_Name": "Inforge",
+			"Stage": "Intro"
+		}
+	]
+}`,
+		displayOptions: {
+			show: {
+				resource: [resource.value],
+				operation: ['createRecords'],
+			},
+		},
+		type: 'json',
+		required: true,
+	},
+	{
+		displayName: 'Data',
+		name: 'updateRecordData',
 		description: 'The data object',
 		default: `{
 	"Deal_Name": "v5 Update",
@@ -60,7 +85,7 @@ export const fields: Field[] = [
 		displayOptions: {
 			show: {
 				resource: [resource.value],
-				operation: ['createRecord', 'updateRecord'],
+				operation: ['updateRecord'],
 			},
 		},
 		type: 'json',
@@ -68,18 +93,18 @@ export const fields: Field[] = [
 	},
 	{
 		displayName: 'Data',
-		name: 'recordsData',
+		name: 'bulkUpdateRecordsData',
 		description: 'The data object',
 		default: `{
-	"data": [
+	"records": [
 		{
-			"id": 410405000002264040,
-			"Deal_Name": "v5 Update",
+			"id": "410405000002264040",
+			"Deal_Name": "Resorsi",
 			"Stage": "Closed Won"
 		},
 		{
-			"id": 410405000002262525,
-			"Deal_Name": "v5 Update",
+			"id": "410405000002262525",
+			"Deal_Name": "Inforge",
 			"Stage": "Closed Won"
 		}
 	]
@@ -87,7 +112,32 @@ export const fields: Field[] = [
 		displayOptions: {
 			show: {
 				resource: [resource.value],
-				operation: ['bulkUpdateRecords', 'upsertRecords'],
+				operation: ['bulkUpdateRecords'],
+			},
+		},
+		type: 'json',
+		required: true,
+	},
+	{
+		displayName: 'Data',
+		name: 'upsertRecords',
+		description: 'The data object',
+		default: `{
+	"records": [
+		{
+			"Deal_Name": "Resorsi",
+			"Stage": "Closed Won"
+		},
+		{
+			"Deal_Name": "Inforge",
+			"Stage": "Closed Won"
+		}
+	]
+}`,
+		displayOptions: {
+			show: {
+				resource: [resource.value],
+				operation: ['upsertRecords'],
 			},
 		},
 		type: 'json',
@@ -201,8 +251,8 @@ export const fields: Field[] = [
 						type: 'string',
 					},
 					{
-						name: 'Updated Time',
-						value: 'Updated_Time',
+						name: 'Modified Time',
+						value: 'Modified_Time',
 						type: 'string',
 					},
 				],
@@ -475,7 +525,6 @@ export const fields: Field[] = [
 			minValue: 1,
 			maxValue: 200,
 		},
-		required: true,
 	},
 	{
 		displayName: 'Page Token',
@@ -491,6 +540,5 @@ export const fields: Field[] = [
 				operation: ['getTimeline'],
 			},
 		},
-		required: true,
 	},
 ];

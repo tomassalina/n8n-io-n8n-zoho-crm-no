@@ -48,6 +48,6 @@
 		"n8n-workflow": "*"
 	},
 	"dependencies": {
-		"zoho-library": "^0.3.2"
+		"zoho-library": "^0.3.6"
 	}
 }

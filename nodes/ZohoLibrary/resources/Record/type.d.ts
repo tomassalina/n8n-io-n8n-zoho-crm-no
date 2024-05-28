@@ -2,7 +2,7 @@ export type RecordOperation =
 	| 'getRecords'
 	| 'getSpecificRecord'
 	| 'searchRecords'
-	| 'createRecord'
+	| 'createRecords'
 	| 'updateRecord'
 	| 'bulkUpdateRecords'
 	| 'upsertRecords'
@@ -24,7 +24,7 @@ export interface GetRecordsFields extends GlobalFields {
 		perPage?: number;
 		pageToken?: string;
 		sortOrder?: 'asc' | 'desc';
-		sortBy?: 'id' | 'Created_Time' | 'Updated_Time';
+		sortBy?: 'id' | 'Created_Time' | 'Modified_Time';
 		accessToken?: string;
 	};
 }
@@ -36,9 +36,7 @@ export interface GetSpecificRecordFields extends GlobalFields {
 
 export interface SearchRecordsFields extends GlobalFields {
 	searchRecordsParameters: {
-		criteria?: {
-			criteria: Array<string, Array<string>>;
-		};
+		criteria?: string; // '{ criteria: [] }'
 		email?: string;
 		phone?: string;
 		word?: string;
@@ -50,24 +48,20 @@ export interface SearchRecordsFields extends GlobalFields {
 }
 
 export interface CreateRecordFields extends GlobalFields {
-	data: object;
+	createRecordsData: string; // '{ records: [] }'
 }
 
 export interface UpdateRecordFields extends GlobalFields {
 	recordId: string;
-	data: object;
+	updateRecordData: string; // '{ }'
 }
 
 export interface BulkUpdateRecordsFields extends GlobalFields {
-	recordsData: {
-		data: Array<object>;
-	};
+	bulkUpdateRecordsData: string; // '{ records: Array<{id: string, [key: string]: any}> }'
 }
 
 export interface UpsertRecordsFields extends GlobalFields {
-	recordsData: {
-		data: Array<object>;
-	};
+	upsertRecords: string; // '{ records: Array<object> }'
 }
 
 export interface DeleteRecordsFields extends GlobalFields {
@@ -84,9 +78,7 @@ export interface GetDeletedRecordsFields extends GlobalFields {
 
 export interface GetCountInModuleFields extends GlobalFields {
 	getCountInModuleParameters: {
-		criteria?: {
-			criteria: Array<string, Array<string>>;
-		};
+		criteria?: string; // '{ criteria: [] }';
 		email?: string;
 		phone?: string;
 		word?: string;
@@ -98,3 +90,16 @@ export interface GetTimelineFields extends GlobalFields {
 	perPage: number;
 	pageToken: string;
 }
+
+export type PossibleRecordFields =
+	| GetRecordsFields
+	| GetSpecificRecordFields
+	| SearchRecordsFields
+	| CreateRecordFields
+	| UpdateRecordFields
+	| BulkUpdateRecordsFields
+	| UpsertRecordsFields
+	| DeleteRecordsFields
+	| GetDeletedRecordsFields
+	| GetCountInModuleFields
+	| GetTimelineFields;
