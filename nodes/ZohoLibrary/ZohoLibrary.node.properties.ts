@@ -1,6 +1,7 @@
 import { INodeProperties } from 'n8n-workflow';
 import { CoreResource, CoreOperations } from './resources/Core';
 import { EmailResource, EmailOperations, EmailFields } from './resources/Email';
+import { RecordResource, RecordOperations, RecordFields } from './resources/Record';
 
 export const ZohoLibraryProperties: INodeProperties[] = [
 	{
@@ -8,20 +9,17 @@ export const ZohoLibraryProperties: INodeProperties[] = [
 		name: 'resource',
 		type: 'options',
 		noDataExpression: true,
-		options: [
-			CoreResource,
-			{
-				name: 'Record',
-				value: 'record',
-			},
-			EmailResource,
-		],
-		default: 'core',
+		options: [CoreResource, RecordResource, EmailResource],
+		default: '',
 	},
-	// ______CORE:
+	// _____CORE:
 	CoreOperations,
 
-	// ______EMAIL:
+	// _____RECORD:
+	RecordOperations,
+	...RecordFields,
+
+	// _____EMAIL:
 	EmailOperations,
 	...EmailFields,
 ];
