@@ -4,7 +4,9 @@ import { CoreOperation } from './type';
 
 const authenticate = async (zoho: ZohoCRM) => {
 	try {
-		return await zoho.authenticate();
+		return {
+			json: await zoho.authenticate(),
+		};
 	} catch (err) {
 		return { errMessage: err.message };
 	}

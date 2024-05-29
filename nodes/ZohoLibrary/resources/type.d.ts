@@ -1,4 +1,4 @@
-import { INodePropertyOptions, INodeProperties } from 'n8n-workflow';
+import { INodePropertyOptions, INodeProperties, IBinaryKeyData } from 'n8n-workflow';
 
 export interface Resource {
 	name: string;

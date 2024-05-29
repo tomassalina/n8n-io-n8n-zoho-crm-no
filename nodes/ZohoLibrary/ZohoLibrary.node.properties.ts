@@ -2,6 +2,7 @@ import { INodeProperties } from 'n8n-workflow';
 import { CoreResource, CoreOperations } from './resources/Core';
 import { EmailResource, EmailOperations, EmailFields } from './resources/Email';
 import { RecordResource, RecordOperations, RecordFields } from './resources/Record';
+import { AttachmentFields, AttachmentOperations, AttachmentResource } from './resources/Attachment';
 
 export const ZohoLibraryProperties: INodeProperties[] = [
 	{
@@ -9,7 +10,7 @@ export const ZohoLibraryProperties: INodeProperties[] = [
 		name: 'resource',
 		type: 'options',
 		noDataExpression: true,
-		options: [CoreResource, RecordResource, EmailResource],
+		options: [CoreResource, RecordResource, EmailResource, AttachmentResource],
 		default: '',
 	},
 	// _____CORE:
@@ -22,4 +23,8 @@ export const ZohoLibraryProperties: INodeProperties[] = [
 	// _____EMAIL:
 	EmailOperations,
 	...EmailFields,
+
+	// _____ATTACHMENT:
+	AttachmentOperations,
+	...AttachmentFields,
 ];

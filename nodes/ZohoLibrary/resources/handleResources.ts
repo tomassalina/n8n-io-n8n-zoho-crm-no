@@ -14,6 +14,13 @@ import { HandleRecordExecutionParams, handleRecordExecution } from './Record/han
 import { EmailOperation } from './Email/type';
 import { HandleEmailExecutionParams, handleEmailExecution } from './Email/handleEmailExecution';
 
+// Resource: attachment
+import { AttachmentOperation } from './Attachment/type';
+import {
+	HandleAttachmentExecutionParams,
+	handleAttachmentExecution,
+} from './Attachment/handleAttachmentExecution';
+
 export interface ZohoLibraryNodeParameters {
 	resource: ZohoLibraryResource;
 	operation: EmailOperation;
@@ -55,8 +62,13 @@ export const handleResources = async ({
 				operation: operation as EmailOperation,
 				fields: fields as HandleEmailExecutionParams['fields'],
 			});
-		// case 'attachment': return
+		case 'attachment':
+			return await handleAttachmentExecution({
+				zoho,
+				operation: operation as AttachmentOperation,
+				fields: fields as HandleAttachmentExecutionParams['fields'],
+			});
 		default:
-			return;
+			throw new Error('Resource not found');
 	}
 };

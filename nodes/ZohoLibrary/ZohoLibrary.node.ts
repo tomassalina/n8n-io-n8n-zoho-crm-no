@@ -63,9 +63,17 @@ export class ZohoLibrary implements INodeType {
 					throw new NodeOperationError(this.getNode(), response.errMessage, {
 						itemIndex,
 					});
-				returnData.push({
-					json: response,
-				});
+
+				if (response.binary) {
+					returnData.push({
+						json: response.json,
+						binary: response.binary,
+					});
+				} else {
+					returnData.push({
+						json: response,
+					});
+				}
 			} catch (error) {
 				if (this.continueOnFail()) {
 					items.push({ json: this.getInputData(itemIndex)[0].json, error, pairedItem: itemIndex });
